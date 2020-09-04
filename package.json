@@ -19,7 +19,7 @@
     "nodemon": "^2.0.4"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js"
+    "start": "NODE_PATH=src nodemon --exec babel-node src/index.js"
   },
   "author": "",
   "license": "ISC"
