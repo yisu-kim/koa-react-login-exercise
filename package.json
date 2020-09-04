@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@koa/router": "^9.4.0",
     "koa": "^2.13.0"
   },
   "devDependencies": {
