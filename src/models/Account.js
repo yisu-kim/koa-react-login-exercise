@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import crypto from "crypto";
+import generateToken from "lib/token";
 
 const { Schema } = mongoose;
 
@@ -59,6 +60,15 @@ Account.statics.localRegister = function ({ username, email, password }) {
 Account.methods.validatePassword = function (password) {
   const hashed = hash(password);
   return this.password === hashed;
+};
+
+Account.methods.generateToken = function () {
+  const payload = {
+    _id: this._id,
+    profile: this.profile,
+  };
+
+  return generateToken(payload, "account");
 };
 
 export default mongoose.model("Account", Account);
