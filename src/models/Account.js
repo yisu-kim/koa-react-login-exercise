@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import crypto from "crypto";
-import generateToken from "lib/token";
+import { generateToken } from "lib/token";
 
 const { Schema } = mongoose;
 
@@ -63,13 +63,12 @@ Account.methods.validatePassword = function (password) {
 };
 
 Account.methods.generateToken = function () {
-  console.log("generatetoken");
   const payload = {
     _id: this._id,
     profile: this.profile,
   };
 
-  return generateToken(payload);
+  return generateToken(payload, "account");
 };
 
 export default mongoose.model("Account", Account);

@@ -93,6 +93,7 @@ export const localLogin = async (ctx) => {
     httpOnly: true,
     maxAge: SEVEN_DAYS,
   });
+
   ctx.body = account.profile;
 };
 
