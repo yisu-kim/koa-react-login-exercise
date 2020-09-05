@@ -8,10 +8,10 @@ books.get("/:id", get);
 
 books.post("/", create);
 
-books.delete("/", del);
+books.delete("/:id", del);
 
-books.put("/", replace);
+books.put("/:id", replace);
 
-books.patch("/", update);
+books.patch("/:id", update);
 
 export default books;
