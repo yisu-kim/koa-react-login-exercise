@@ -63,12 +63,13 @@ Account.methods.validatePassword = function (password) {
 };
 
 Account.methods.generateToken = function () {
+  console.log("generatetoken");
   const payload = {
     _id: this._id,
     profile: this.profile,
   };
 
-  return generateToken(payload, "account");
+  return generateToken(payload);
 };
 
 export default mongoose.model("Account", Account);

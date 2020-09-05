@@ -37,6 +37,19 @@ export const localRegister = async (ctx) => {
     ctx.throw(500, e);
   }
 
+  let token = null;
+  try {
+    token = await account.generateToken();
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+
+  const SEVEN_DAYS = 1000 * 60 * 60 * 24 * 7;
+
+  ctx.cookies.set("access_token", token, {
+    httpOnly: true,
+    maxAge: SEVEN_DAYS,
+  });
   ctx.body = account.profile;
 };
 
@@ -67,6 +80,19 @@ export const localLogin = async (ctx) => {
     return;
   }
 
+  let token = null;
+  try {
+    token = await account.generateToken();
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+
+  const SEVEN_DAYS = 1000 * 60 * 60 * 24 * 7;
+
+  ctx.cookies.set("access_token", token, {
+    httpOnly: true,
+    maxAge: SEVEN_DAYS,
+  });
   ctx.body = account.profile;
 };
 
@@ -88,5 +114,9 @@ export const exists = async (ctx) => {
 };
 
 export const logout = async (ctx) => {
-  ctx.body = "logout";
+  ctx.cookies.set("access_token", null, {
+    httpOnly: true,
+    maxAge: 0,
+  });
+  ctx.status = 204;
 };
