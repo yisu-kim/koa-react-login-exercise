@@ -121,3 +121,14 @@ export const logout = async (ctx) => {
   });
   ctx.status = 204;
 };
+
+export const check = async (ctx) => {
+  const { user } = ctx.request;
+
+  if (!user) {
+    ctx.status = 403;
+    return;
+  }
+
+  ctx.body = user.profile;
+};
