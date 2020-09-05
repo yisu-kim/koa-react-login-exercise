@@ -17,8 +17,8 @@ const Account = new Schema({
       type: String,
       default: "/static/images/default_thumbnail.png",
     },
-    email: { type: String },
   },
+  email: String,
   social: {
     google: {
       id: String,
@@ -39,7 +39,9 @@ Account.statics.findByEmail = function (email) {
 };
 
 Account.statics.findByEmailOrUsername = function ({ username, email }) {
-  return this.findOne({ $or: [{ "profile.username": username }, { email }] });
+  return this.findOne({
+    $or: [{ "profile.username": username }, { email }],
+  });
 };
 
 Account.statics.localRegister = function ({ username, email, password }) {
